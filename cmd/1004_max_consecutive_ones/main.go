@@ -20,7 +20,6 @@ func longestOnes(nums []int, k int) int {
 		end = i
 		if num == 0 {
 			if flippedZeros >= k {
-				maxSoFar = int(math.Max(float64(maxSoFar), float64(float64(end)-float64(start))))
 				for flippedZeros >= k {
 					if nums[start] == 0 {
 						flippedZeros--
@@ -30,12 +29,18 @@ func longestOnes(nums []int, k int) int {
 					}
 				}
 				flippedZeros++
+				// lets override if we got another max
+				maxSoFar = int(math.Max(float64(maxSoFar), float64(float64(end)-float64(start)+1)))
 			} else {
 				flippedZeros++
+				// lets override if we got another max
+				maxSoFar = int(math.Max(float64(maxSoFar), float64(float64(end)-float64(start)+1)))
 			}
+		} else {
+			// lets override if we got another max
+			maxSoFar = int(math.Max(float64(maxSoFar), float64(float64(end)-float64(start)+1)))
 		}
 	}
-	maxSoFar = int(math.Max(float64(maxSoFar), float64(float64(end)-float64(start)+1)))
 
 	return maxSoFar
 }
